@@ -1,6 +1,8 @@
 ---
 name: django-best-practices
 description: A senior Django developer's knowledge base for Claude Code. Wrong vs correct examples across 27 topics — from ORM to deployment.
+compatibility: Designed for Claude Code. Requires Python and Django.
+allowed-tools: Read Write Edit Bash(python:*) Bash(pip:*)
 ---
 
 # Django Best Practices
