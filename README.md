@@ -1,6 +1,6 @@
 # django-skills
 
-A Claude Code skill that teaches Django best practices through wrong vs. correct code examples. Covers 27 topics and 213 sub-topics, from project structure to deployment.
+A Claude Code skill and agent for Django best practices. Covers 27 topics and 213 sub-topics through wrong vs. correct code examples — from project structure to deployment.
 
 When installed, Claude Code automatically applies these patterns when working on Django projects — writing better queries, avoiding N+1 problems, using correct field types, following security best practices, and more.
 
@@ -20,65 +20,99 @@ This skill provides Claude Code with a senior Django developer's knowledge base.
 
 Claude uses this knowledge automatically when generating, reviewing, or refactoring Django code.
 
+## File Structure
+
+```
+django-skills/
+├── skills/
+│   └── django-best-practices/
+│       ├── SKILL.md                    # Workflow, rules, and reference index
+│       └── references/
+│           ├── core.md                 # Project structure, settings, WSGI/ASGI
+│           ├── models.md               # Field types, relations, Meta, managers
+│           ├── queries.md              # QuerySets, Q/F objects, aggregation, N+1
+│           ├── migrations.md           # Safe migrations, data migrations, squashing
+│           ├── admin.md                # ModelAdmin, inlines, actions, performance
+│           ├── views.md                # FBV, CBV, generic views, mixins
+│           ├── urls.md                 # path/re_path, namespaces, converters
+│           ├── templates.md            # Inheritance, tags, filters, security
+│           ├── forms.md                # ModelForms, validation, formsets
+│           ├── auth.md                 # User models, permissions, sessions
+│           ├── middleware.md            # Request lifecycle, ordering, async
+│           ├── static-media.md         # WhiteNoise, S3/CDN, file uploads
+│           ├── security.md             # CSRF, XSS, SQL injection, HTTPS
+│           ├── signals.md              # pre/post_save, custom signals
+│           ├── caching.md              # Redis, per-view, fragment, invalidation
+│           ├── i18n.md                 # gettext_lazy, timezone support
+│           ├── testing.md              # pytest, factory_boy, mocking, coverage
+│           ├── drf.md                  # Serializers, viewsets, permissions
+│           ├── celery.md               # Task definition, retries, periodic tasks
+│           ├── deployment.md           # Gunicorn, Docker, CI/CD, async views
+│           ├── channels.md             # WebSocket consumers, channel layers
+│           ├── ecosystem.md            # Allauth, storages, debug toolbar
+│           └── architecture.md         # Service layer, DDD, SOLID, multi-DB
+└── agents/
+    └── django-developer/
+        └── AGENT.md                    # Senior Django developer agent
+```
+
+## Architecture
+
+This repo follows the **progressive disclosure** pattern:
+
+- **SKILL.md** — Slim workflow file with rules and a reference index. No inline code examples.
+- **references/** — 23 self-contained reference files with wrong/correct code patterns per topic.
+- **AGENT.md** — A senior Django developer agent that preloads the skill and applies structured workflows.
+
+Claude reads only what it needs: SKILL.md identifies the topic, then loads the relevant reference file on demand.
+
 ## Topics Covered
 
-| #  | Section                    | What It Covers                                                        |
-|----|----------------------------|-----------------------------------------------------------------------|
-| 1  | Django Core                | Project structure, app layout, settings split, URL config, WSGI/ASGI  |
-| 2  | Models (ORM)               | Field types, ForeignKey, M2M, abstract models, proxy models, managers |
-| 3  | Django ORM                 | QuerySets, Q/F objects, aggregation, subqueries, select/prefetch      |
-| 4  | Migrations                 | Safe migrations, data migrations, squashing, zero-downtime ops        |
-| 5  | Django Admin               | ModelAdmin, inlines, actions, fieldsets, custom views, performance    |
-| 6  | Views                      | FBV, CBV, generic views, mixins, when to use which                   |
-| 7  | URL Routing                | path/re_path, namespaces, reverse, custom converters                 |
-| 8  | Templates                  | Inheritance, tags, filters, custom tags, context processors, security |
-| 9  | Forms                      | Forms, ModelForms, validation, formsets, file upload security         |
-| 10 | Authentication             | Custom user model, backends, permissions, groups, password reset      |
-| 11 | Sessions & Cookies         | Backend selection, cookie security, session expiry and rotation       |
-| 12 | Middleware                 | Request lifecycle, ordering, custom middleware, async middleware       |
-| 13 | Static & Media Files       | STATIC_ROOT vs STATICFILES_DIRS, WhiteNoise, S3/CDN, collectstatic  |
-| 14 | Django Security            | CSRF, XSS, SQL injection, HTTPS, password hashing, SECRET_KEY        |
-| 15 | Django Signals             | pre/post_save, m2m_changed, custom signals, when to avoid signals    |
-| 16 | Caching                    | Redis, per-view cache, fragment cache, low-level API, invalidation   |
-| 17 | File Handling              | FileField, storage API, upload security, Pillow                      |
-| 18 | Internationalization       | i18n settings, gettext_lazy, template tags, timezone support          |
-| 19 | Testing                    | TestCase types, fixtures, pytest-django, FactoryBoy, mocking         |
-| 20 | Django REST Framework      | Serializers, ViewSets, auth, permissions, throttling, filtering      |
-| 21 | Background Tasks           | Celery, Django-Q, Huey, Django 6.0 tasks, idempotency                |
-| 22 | Deployment                 | Gunicorn, Nginx, Docker, CI/CD, zero-downtime, health checks         |
-| 23 | Performance                | Debug Toolbar, N+1, indexing, caching, deferred fields, async views  |
-| 24 | Django Channels            | ASGI, WebSocket consumers, channel layers, group messaging            |
-| 25 | Django Ecosystem           | DRF, Allauth, Storages, Guardian, Unfold, django-redis, and more     |
-| 26 | Advanced Django            | Custom fields, multi-DB, database routers, custom management commands |
-| 27 | Django Architecture        | MTV pattern, service layer, DDD, SOLID, anti-patterns                |
+| #  | Topic                      | Reference File         |
+|----|----------------------------|------------------------|
+| 1  | Project Structure          | `references/core.md`   |
+| 2  | Models & ORM               | `references/models.md` |
+| 3  | ORM Queries                | `references/queries.md` |
+| 4  | Migrations                 | `references/migrations.md` |
+| 5  | Django Admin               | `references/admin.md` |
+| 6  | Views                      | `references/views.md` |
+| 7  | URL Routing                | `references/urls.md` |
+| 8  | Templates                  | `references/templates.md` |
+| 9  | Forms                      | `references/forms.md` |
+| 10 | Authentication & Sessions  | `references/auth.md` |
+| 11 | Middleware                 | `references/middleware.md` |
+| 12 | Static & Media Files       | `references/static-media.md` |
+| 13 | Security                   | `references/security.md` |
+| 14 | Signals                    | `references/signals.md` |
+| 15 | Caching                    | `references/caching.md` |
+| 16 | Internationalization       | `references/i18n.md` |
+| 17 | Testing                    | `references/testing.md` |
+| 18 | Django REST Framework      | `references/drf.md` |
+| 19 | Background Tasks           | `references/celery.md` |
+| 20 | Deployment & Performance   | `references/deployment.md` |
+| 21 | Django Channels            | `references/channels.md` |
+| 22 | Django Ecosystem           | `references/ecosystem.md` |
+| 23 | Architecture Patterns      | `references/architecture.md` |
 
 ## Example
 
-Every sub-topic follows this structure:
+Every sub-topic in the reference files follows this structure:
 
 ```markdown
 ### select_related
 
-Wrong:
+**Wrong:**
   comments = Comment.objects.all()
   for comment in comments:
       print(comment.post.title)  # N+1 queries
 
-Correct:
+**Correct:**
   comments = Comment.objects.select_related('post').all()
   for comment in comments:
       print(comment.post.title)  # Single query with JOIN
 
-Why: select_related uses SQL JOINs to fetch related ForeignKey/OneToOne
-objects in a single query. Use it whenever you access FK relations in a loop.
-```
-
-## File Structure
-
-```
-skills/
-  django-best-practices/
-    SKILL.md          # The skill file (8,000+ lines, 213 sub-topics)
+> **Why:** select_related uses SQL JOINs to fetch related ForeignKey/OneToOne
+> objects in a single query. Use it whenever you access FK relations in a loop.
 ```
 
 ## Requirements
