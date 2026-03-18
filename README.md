@@ -113,12 +113,3 @@ Every sub-topic in the reference files follows this structure:
 > **Why:** select_related uses SQL JOINs to fetch related ForeignKey/OneToOne
 > objects in a single query. Use it whenever you access FK relations in a loop.
 ```
-
-## Requirements
-
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) CLI
-- [skills.sh](https://skills.sh) ecosystem (`npx skills`)
-
-## License
-
-MIT
