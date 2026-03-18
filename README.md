@@ -52,8 +52,7 @@ django-skills/
 │           ├── ecosystem.md            # Allauth, storages, debug toolbar
 │           └── architecture.md         # Service layer, DDD, SOLID, multi-DB
 └── agents/
-    └── django-developer/
-        └── AGENT.md                    # Senior Django developer agent
+    └── django-developer.md             # Senior Django developer agent
 ```
 
 ## Architecture
