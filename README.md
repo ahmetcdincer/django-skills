@@ -19,6 +19,13 @@ npx skills add Reyretee/django-skills --skill django-best-practices
 mkdir -p .claude/agents && curl -o .claude/agents/django-developer.md https://raw.githubusercontent.com/Reyretee/django-skills/main/agents/django-developer.md
 ```
 
+**Windows (PowerShell):**
+
+```powershell
+npx skills add Reyretee/django-skills --skill django-best-practices
+New-Item -ItemType Directory -Force -Path .claude\agents | Out-Null; Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Reyretee/django-skills/main/agents/django-developer.md" -OutFile ".claude\agents\django-developer.md"
+```
+
 > **Note:** The `npx skills add` command only installs skills. The Django developer agent must be downloaded separately as shown above.
 
 ## What It Does
