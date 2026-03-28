@@ -6,9 +6,20 @@ When installed, Claude Code automatically applies these patterns when working on
 
 ## Installation
 
+### Skill Only
+
 ```bash
 npx skills add Reyretee/django-skills --skill django-best-practices
 ```
+
+### Skill + Agent
+
+```bash
+npx skills add Reyretee/django-skills --skill django-best-practices
+mkdir -p .claude/agents && curl -o .claude/agents/django-developer.md https://raw.githubusercontent.com/Reyretee/django-skills/main/agents/django-developer.md
+```
+
+> **Note:** The `npx skills add` command only installs skills. The Django developer agent must be downloaded separately as shown above.
 
 ## What It Does
 
